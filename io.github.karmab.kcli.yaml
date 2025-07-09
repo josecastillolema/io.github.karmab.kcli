@@ -1,0 +1,98 @@
+# flatpak-builder build-dir io.github.karmab.kcli.yaml --force-clean
+# flatpak-builder --user --install --force-clean build-dir io.github.karmab.kcli.yaml
+app-id: io.github.karmab.kcli
+runtime: org.freedesktop.Platform
+runtime-version: "24.08"
+sdk: org.freedesktop.Sdk
+command: kcli
+finish-args:
+  - --env=PATH=/app/bin:/usr/bin:/app/lib/extensions/bin
+  - --filesystem=home
+  - --filesystem=/run/libvirt
+  - --filesystem=xdg-run/libvirt
+  - --filesystem=~/.ssh
+  - --share=ipc
+  - --share=network
+  - --socket=ssh-auth
+  - --talk-name=org.freedesktop.Flatpak
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/applications/mimeinfo.cache
+  - /share/bash-completion
+  - /share/icons/hicolor/icon-theme.cache
+  - /share/man
+  - /share/pkgconfig
+  - "*.la"
+cleanup-commands:
+  - mkdir -p ${FLATPAK_DEST}/lib/extensions
+add-extensions:
+  org.virt_manager.virt_manager.Extension:
+    directory: lib/extensions
+    subdirectories: true
+    merge-dirs: bin;share;lib
+    add-ld-path: lib
+    autodelete: true
+    no-autodownload: true
+modules:
+  - name: python3-docutils
+    buildsystem: simple
+    build-commands:
+      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "docutils" --no-build-isolation
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/8f/d7/9322c609343d929e75e7e5e6255e614fcc67572cfd083959cdef3b7aad79/docutils-0.21.2-py3-none-any.whl
+        sha256: dafca5b9e384f0e419294eb4d2ff9fa826435bf15f15b7bd45723e8ad76811b2
+  - name: json-c
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DENABLE_THREADING=ON
+      - -DDISABLE_WERROR=ON
+    sources:
+      - type: archive
+        url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.18.tar.gz
+        sha256: 876ab046479166b869afc6896d288183bbc0e5843f141200c677b3e8dfb11724
+  - name: libtirpc
+    buildsystem: autotools
+    config-opts:
+      - --disable-static
+      - --disable-gssapi
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/project/libtirpc/libtirpc/1.3.4/libtirpc-1.3.4.tar.bz2
+        sha256: 1e0b0c7231c5fa122e06c0609a76723664d068b0dba3b8219b63e6340b347860
+  - name: libvirt
+    builddir: true
+    buildsystem: meson
+    build-options:
+      cflags: "-I/app/include/tirpc -ltirpc"
+    config-opts:
+      - --libexec=/app/lib/libvirt
+      - --sbindir=/app/bin
+      - --localstatedir=/var
+      - -Ddriver_qemu=enabled
+      - -Drunstatedir=/run
+      - -Drpath=enabled
+      - -Dqemu_user=qemu
+      - -Dqemu_group=qemu
+      - -Dqemu_datadir=/app/lib/extensions/share/qemu
+      - -Ddocs=enabled
+      - -Dtests=disabled
+      - -Dstorage_mpath=disabled
+      - -Dfirewalld=disabled
+      - -Dfirewalld_zone=disabled
+      - -Dinit_script=none
+      - -Dsysctl_config=disabled
+    sources:
+      - type: archive
+        url: https://libvirt.org/sources/libvirt-11.5.0.tar.xz
+        sha256: 2b63b9d60538e1e2fa4e3f6d836409e6ff705249c79001914ac3400859d72423
+  - python3-requirements.json
+  - name: kcli
+    buildsystem: simple
+    build-commands:
+      - pip3 install --prefix=/app --no-deps .
+    sources:
+      - type: archive
+        url: https://files.pythonhosted.org/packages/8e/3c/4d0bb696d09f10e223bac436371fac0c86284f86e435ee01600fb78f53e8/kcli-99.0.202507042123.tar.gz
+        sha256: cb9046d8e4de26a534c8a16829b7bc733475b550d98046a4a90ebcb40112f475
