@@ -6,7 +6,6 @@ runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
 command: kcli
 finish-args:
-  - --env=PATH=/app/bin:/usr/bin:/app/lib/extensions/bin
   - --filesystem=home
   - --filesystem=/run/libvirt
   - --filesystem=xdg-run/libvirt
@@ -24,17 +23,31 @@ cleanup:
   - /share/man
   - /share/pkgconfig
   - "*.la"
-cleanup-commands:
-  - mkdir -p ${FLATPAK_DEST}/lib/extensions
-add-extensions:
-  org.virt_manager.virt_manager.Extension:
-    directory: lib/extensions
-    subdirectories: true
-    merge-dirs: bin;share;lib
-    add-ld-path: lib
-    autodelete: true
-    no-autodownload: true
 modules:
+  - name: qemu
+    config-opts:
+      - --disable-download
+      - --enable-kvm
+      - --disable-debug-info
+      - --disable-docs
+      - --disable-user
+      - --python=/bin/python3
+      - --target-list=x86_64-softmmu,i386-softmmu
+      - --disable-bsd-user
+      - --disable-debug-info
+      - --disable-glusterfs
+      - --disable-linux-user
+      - --disable-oss
+      - --disable-werror
+      - --disable-xen
+    sources:
+      - type: archive
+        url: https://download.qemu.org/qemu-9.2.0.tar.xz
+        sha256: f859f0bc65e1f533d040bbe8c92bcfecee5af2c921a6687c652fb44d089bd894
+        x-checker-data:
+          type: anitya
+          project-id: 13607
+          url-template: https://download.qemu.org/qemu-9.2.0.tar.xz
   - name: python3-docutils
     buildsystem: simple
     build-commands:
@@ -75,7 +88,6 @@ modules:
       - -Drpath=enabled
       - -Dqemu_user=qemu
       - -Dqemu_group=qemu
-      - -Dqemu_datadir=/app/lib/extensions/share/qemu
       - -Ddocs=enabled
       - -Dtests=disabled
       - -Dstorage_mpath=disabled
