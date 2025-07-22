@@ -100,6 +100,12 @@ modules:
         url: https://libvirt.org/sources/libvirt-11.5.0.tar.xz
         sha256: 2b63b9d60538e1e2fa4e3f6d836409e6ff705249c79001914ac3400859d72423
   - python3-requirements.json
+  - name: xorriso
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://www.gnu.org/software/xorriso/xorriso-1.5.6.pl02.tar.gz
+        sha256: 786f9f5df9865cc5b0c1fecee3d2c0f5e04cab8c9a859bd1c9c7ccd4964fdae1
   - name: kcli
     buildsystem: simple
     build-commands:
