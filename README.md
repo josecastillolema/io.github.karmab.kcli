@@ -8,7 +8,7 @@ Furthermore, you can deploy VMs using predefined profiles, several at once using
 
 Refer to kcli [documentation](https://kcli.readthedocs.io/) for more information.
 
->**NOTE:** By default, this Flatpak includes the libvirt daemon and QEMU. There is no need to install other applications, extensions or anything else in the host.
+>**NOTE:** This Flatpak includes the libvirt daemon and QEMU. There is no need to install other applications, extensions or anything else in the host.
 
 ## Quick start
 
