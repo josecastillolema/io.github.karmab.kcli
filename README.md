@@ -12,10 +12,25 @@ Refer to kcli [documentation](https://kcli.readthedocs.io/) for more information
 
 ## Quick start
 
+Instruct kcli to use `qemu:///session`:
+```
+$ echo 'default:
+  session: true' > lala.cl
+```
+
 Create a default pool on your home directory:
 ```
 $ mkdir -p ~/.kcli/images
 $ flatpak run io.github.karmab.kcli create pool -p ~/.kcli/images default
+```
+
+Deploy your first vm with:
+```
+$ flatpak run io.github.karmab.kcli create vm -i centos8stream myvm
+$ flatpak run io.github.karmab.kcli list vm
+# wait 5-10 seconds for vm to grab an ip
+$ flatpak run io.github.karmab.kcli ssh myvm
+$ flatpak run io.github.karmab.kcli delete vm
 ```
 
 ## Use with CLI
