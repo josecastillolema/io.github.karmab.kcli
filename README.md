@@ -44,4 +44,6 @@ This launches a shell within the Flatpak sandbox for kcli, allowing you to run C
 
 ## Known issues or untested features
 
-As the feature set of kcli is quite large, we have not yet tested that all functionalities work with the Flatpak. Please report issues in this repo if you find something that does not work.
+As the feature set of kcli is quite large, we have not yet tested that all functionalities work with the Flatpak. The main use case for this flatpak is to support headless virtual machines.
+
+Please report issues in this repo if you find something that does not work.

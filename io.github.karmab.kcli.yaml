@@ -6,10 +6,12 @@ runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
 command: kcli
 finish-args:
+  - --device=all
   - --filesystem=home
   - --filesystem=/run/libvirt
   - --filesystem=xdg-run/libvirt
   - --filesystem=~/.ssh
+  - --filesystem=host
   - --share=ipc
   - --share=network
   - --socket=ssh-auth
@@ -24,15 +26,20 @@ cleanup:
   - /share/pkgconfig
   - "*.la"
 modules:
+  - name: slirp
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v4.7.0.tar.gz
+        sha256: ccfd4e330b3d59be19e0cce25b0da000d61bcee2cfb608eb23418920d991a6da
   - name: qemu
     config-opts:
-      - --disable-download
       - --enable-kvm
+      - --enable-slirp
+      - --disable-download
       - --disable-debug-info
       - --disable-docs
       - --disable-user
-      - --python=/bin/python3
-      - --target-list=x86_64-softmmu,i386-softmmu
       - --disable-bsd-user
       - --disable-debug-info
       - --disable-glusterfs
@@ -40,6 +47,8 @@ modules:
       - --disable-oss
       - --disable-werror
       - --disable-xen
+      - --python=/bin/python3
+      - --target-list=x86_64-softmmu,i386-softmmu
     sources:
       - type: archive
         url: https://download.qemu.org/qemu-9.2.0.tar.xz
