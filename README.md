@@ -10,6 +10,8 @@ Refer to kcli [documentation](https://kcli.readthedocs.io/) for more information
 
 >**NOTE:** This Flatpak includes the libvirt daemon and QEMU. There is no need to install other applications, extensions or anything else in the host.
 
+> libvirt is used from its session interface (`qemu:///session`), which runs VMs completely isolated from their host’s storage and network resources. Session VMs run completely rootless, by default, with user mode networking and user’s files as virtual disks.
+
 ## Quick start
 
 Instruct kcli to use `qemu:///session`:
