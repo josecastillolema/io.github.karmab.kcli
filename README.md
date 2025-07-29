@@ -9,8 +9,7 @@ Furthermore, you can deploy VMs using predefined profiles, several at once using
 Refer to kcli [documentation](https://kcli.readthedocs.io/) for more information.
 
 >**NOTE:** This Flatpak includes the libvirt daemon and QEMU. There is no need to install other applications, extensions or anything else in the host.
-
-> libvirt is used from its session interface (`qemu:///session`), which runs VMs completely isolated from their host’s storage and network resources. Session VMs run completely rootless, by default, with user mode networking and user’s files as virtual disks.
+> libvirt is used from its session interface (`qemu:///session`), which runs VMs completely isolated from their host’s storage and network resources. Session VMs run completely rootless, by default, with user mode networking and user's files as virtual disks.
 
 ## Quick start
 
@@ -46,6 +45,6 @@ This launches a shell within the Flatpak sandbox for kcli, allowing you to run C
 
 ## Known issues or untested features
 
-As the feature set of kcli is quite large, we have not yet tested that all functionalities work with the Flatpak. The main use case for this flatpak is to support headless virtual machines.
+As the feature set of kcli is quite large, we have not yet tested that all functionalities work with the Flatpak. The main use case for this flatpak is to support rootless headless virtual machines.
 
 Please report issues in this repo if you find something that does not work.
