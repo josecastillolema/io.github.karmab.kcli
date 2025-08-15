@@ -16,7 +16,8 @@ Refer to kcli [documentation](https://kcli.readthedocs.io/) for more information
 Instruct kcli to use `qemu:///session`:
 ```
 $ echo 'default:
-  session: true' > ~/.kcli/config.yml
+  session: true
+  vnc: false' > ~/.kcli/config.yml
 ```
 
 Create a default pool on your home directory:
