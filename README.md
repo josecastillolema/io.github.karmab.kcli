@@ -28,7 +28,7 @@ $ flatpak run io.github.karmab.kcli create pool -p ~/.kcli/images default
 
 Deploy your first vm with:
 ```
-$ flatpak run io.github.karmab.kcli create vm -i centos8stream myvm
+$ flatpak run io.github.karmab.kcli create vm -i centos8stream -P usermode_backend=slirp myvm
 $ flatpak run io.github.karmab.kcli list vm
 # wait 5-10 seconds for vm to grab an ip
 $ flatpak run io.github.karmab.kcli ssh myvm

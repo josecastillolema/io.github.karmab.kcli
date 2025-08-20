@@ -1,5 +1,5 @@
-# flatpak-builder build-dir io.github.karmab.kcli.yaml --force-clean
-# flatpak-builder --user --install --force-clean build-dir io.github.karmab.kcli.yaml
+# org.flatpak.Builder build-dir io.github.karmab.kcli.yaml --force-clean
+# org.flatpak.Builder --user --install --force-clean build-dir io.github.karmab.kcli.yaml
 app-id: io.github.karmab.kcli
 runtime: org.freedesktop.Platform
 runtime-version: "24.08"
@@ -32,6 +32,14 @@ modules:
       - type: archive
         url: https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v4.7.0.tar.gz
         sha256: ccfd4e330b3d59be19e0cce25b0da000d61bcee2cfb608eb23418920d991a6da
+  - name: python3-distlib
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-deps --no-build-isolation --prefix=${FLATPAK_DEST} .
+    sources:
+      - type: archive
+        url: https://files.pythonhosted.org/packages/96/8e/709914eb2b5749865801041647dc7f4e6d00b549cfe88b65ca192995f07c/distlib-0.4.0.tar.gz
+        sha256: feec40075be03a04501a973d81f633735b4b69f98b05450592310c0f401a4e0d
   - name: qemu
     config-opts:
       - --enable-kvm
@@ -121,5 +129,5 @@ modules:
       - pip3 install --prefix=/app --no-deps .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/8e/3c/4d0bb696d09f10e223bac436371fac0c86284f86e435ee01600fb78f53e8/kcli-99.0.202507042123.tar.gz
-        sha256: cb9046d8e4de26a534c8a16829b7bc733475b550d98046a4a90ebcb40112f475
+        url: https://files.pythonhosted.org/packages/9a/ea/d22bea33abb0921c0e0527e86d45335ef65e6697ab955204b6cf8a1515b6/kcli-99.0.202508081435.tar.gz
+        sha256: 71ff1d2aee3d04dc3b8bb4efa6e620eafceba23131ce04036abc970b7b56ed14
