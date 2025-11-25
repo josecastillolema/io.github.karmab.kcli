@@ -129,5 +129,5 @@ modules:
       - pip3 install --prefix=/app --no-deps .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/9a/ea/d22bea33abb0921c0e0527e86d45335ef65e6697ab955204b6cf8a1515b6/kcli-99.0.202508081435.tar.gz
-        sha256: 71ff1d2aee3d04dc3b8bb4efa6e620eafceba23131ce04036abc970b7b56ed14
+        url: https://files.pythonhosted.org/packages/ad/3d/8624cf3126ffd162c244a40470d89994d7cc2a8d31e283e9b6c4f176bc8e/kcli-99.0.202511211412.tar.gz
+        sha256: c4696b9a3b777a6975b7bed1f090cddaeeb9a6150b9ed7c67ac40505aa5b8b98
