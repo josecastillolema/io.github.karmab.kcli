@@ -112,6 +112,8 @@ modules:
       - -Dfirewalld_zone=disabled
       - -Dinit_script=none
       - -Dsysctl_config=disabled
+    post-install:
+      - echo "seccomp_sandbox = 0" >> /app/etc/libvirt/qemu.conf
     sources:
       - type: archive
         url: https://libvirt.org/sources/libvirt-11.5.0.tar.xz
@@ -137,7 +139,10 @@ modules:
     buildsystem: simple
     build-commands:
       - pip3 install --prefix=/app --no-deps --no-build-isolation .
+      - install -Dm644 kcli.png /app/share/icons/hicolor/128x128/apps/io.github.karmab.kcli.png
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/ad/3d/8624cf3126ffd162c244a40470d89994d7cc2a8d31e283e9b6c4f176bc8e/kcli-99.0.202511211412.tar.gz
         sha256: c4696b9a3b777a6975b7bed1f090cddaeeb9a6150b9ed7c67ac40505aa5b8b98
+      - type: file
+        path: kcli.png

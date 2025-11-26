@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flatpak-builder:*)",
+      "Bash(org.flatpak.Builder:*)",
+      "Bash(flatpak run io.github.karmab.kcli list:*)",
+      "Bash(flatpak run:*)",
+      "Bash(ssh:*)",
+      "Bash(netstat:*)",
+      "Bash(ss:*)",
+      "Bash(lsof:*)",
+      "Bash(timeout:*)",
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(python3:*)",
+      "Read(//var/home/jose/.ssh/**)",
+      "Read(//var/home/jose/.kcli/images/**)",
+      "Bash(cat:*)",
+      "Read(//var/home/jose/.kcli/**)",
+      "WebFetch(domain:kcli.readthedocs.io)",
+      "Bash(flatpak info:*)",
+      "WebFetch(domain:docs.flatpak.org)",
+      "WebFetch(domain:github.com)",
+      "Bash(flatpak:*)",
+      "Read(//home/jose/.kcli/**)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:libvirt.org)",
+      "Read(//home/jose/.claude/shell-snapshots/**)",
+      "Bash(org.freedesktop.appstream-glib validate:*)",
+      "Bash(identify:*)",
+      "Bash(convert:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
